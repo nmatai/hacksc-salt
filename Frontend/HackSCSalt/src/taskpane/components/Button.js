@@ -7,17 +7,17 @@ export class ButtonInsertText extends React.Component {
     super(props);
   }
 
-  insertText = async () => {
+  insertText = async (newText) => {
     // In the click event, write text to the document.
     await Word.run(async (context) => {
       let body = context.document.body;
-      body.insertParagraph('Hello Fluent UI React!', Word.InsertLocation.end);
+      body.insertParagraph(newText, Word.InsertLocation.end);
       await context.sync();
     });
   }
 
   render() {
-    let { disabled } = this.props;
+    let { disabled, newText } = this.props;
     return (
       <div className='ms-BasicButtonsExample'>
         <Label>Click the button to insert text.</Label>
@@ -25,7 +25,7 @@ export class ButtonInsertText extends React.Component {
           data-automation-id='test'
           disabled={ disabled }
           text='Insert text...'
-          onClick={ this.insertText } />
+          onClick={ () => this.insertText(newText) } />
       </div>
     );
   }

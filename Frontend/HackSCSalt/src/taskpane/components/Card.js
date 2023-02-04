@@ -49,7 +49,7 @@ export default class Card extends Component {
           display: this.state.visible,
         }}
       >
-        <div style={{ fontSize: 16, letterSpacing: 0.15, marginBottom: 15, fontWeight: 500 }}>Title</div>
+        <div style={{ fontSize: 16, letterSpacing: 0.15, marginBottom: 15, fontWeight: 500 }}>{this.props.title}</div>
         <div style={{ fontSize: 14, letterSpacing: 0.25, lineHeight: "20px", color: "#00000099" ,height:this.state.height,overflow:"hidden"}}>
           {this.props.paragraph}
         </div>

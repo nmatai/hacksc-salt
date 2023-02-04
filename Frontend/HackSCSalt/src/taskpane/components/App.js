@@ -2,7 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import TextField from '@mui/material/TextField';
 import CustomTabs from "./Tabs";
-import {ButtonInsertText, ButtonReplaceText} from './Button';
+import {ButtonInsertText, ButtonReplaceText, ButtonReplaceTextAll} from './Button';
 
 /* global Word, require */
 
@@ -57,9 +57,8 @@ export default class App extends React.Component {
           <ButtonInsertText newText="HackSC"/>
           <TextField label="Find" variant="standard" value={this.state.targetCurrentWord} onChange={this.changeCurrentWord}/>
           <TextField label="Replace" variant="standard" value={this.state.targetNewWord} onChange={this.changeNewWord}/>
-          <ButtonReplaceText currText={this.state.targetCurrentWord} newText={this.state.targetNewWord}/>
+          <ButtonReplaceTextAll currText={this.state.targetCurrentWord} newText={this.state.targetNewWord}/>
         </div>
-
       </div>
     );
   }

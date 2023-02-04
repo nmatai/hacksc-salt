@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 
-export default class Card extends Component {
+export default class ReplaceCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: "block",
       expanded: false,
-      height:100
+      height:100,
+      words: []
     };
+    this.removeCard = this.removeCard.bind(this);
+    this.replaceText = this.replaceText.bind(this);
+    this.changeExpanded = this.changeExpanded.bind(this);
   }
 
   changeExpanded = async () => {
@@ -23,22 +27,66 @@ export default class Card extends Component {
       });
     }
   };
-  
-  insertText = async () => {
-    // In the click event, write text to the document.
-    await Word.run(async (context) => {
-      let body = context.document.body;
-      body.insertParagraph(this.props.paragraph, Word.InsertLocation.end);
-      await context.sync();
-      this.removeCard();
-    });
-  };
 
-  removeCard = async () => {
+  findText = async (currText) => {
+    await Word.run(async (context) => {
+        let results = context.document.body.search(currText);
+        context.load(results);
+        await context.sync();
+        this.setState({words: results.items})
+        for (var i = 0; i < results.items.length; i++) {
+            results.items[i].font.highlightColor = '#FFFF00'; //Yellow
+            results.items[i].font.bold = true;
+        }
+        await context.sync();
+      });
+  };
+  
+  replaceText = async (currText, newText) => {
+    await Word.run(async (context) => {
+      let results = context.document.body.search(currText);
+      context.load(results);
+      return context.sync()
+      .then(
+        () => {
+          for (var i = 0; i < results.items.length; i++) {
+            results.items[i].insertHtml(newText, "replace");     //Replace the text HERE
+          }
+        }
+      )
+    });
+  }
+
+  removeEffectFind = async () => {
+    await Word.run(async (context) => {
+        for (var i = 0; i < this.words.length; i++) {
+            this.words[i].font.color = 'black';
+            this.words[i].font.highlightColor = null; //Yellow
+            this.words[i].font.bold = false;
+        }
+        await context.sync();
+      });
+  }
+
+  removeCard = () => {
     this.setState({
       visible: "none",
     });
   };
+
+  accept = async () => {
+    this.replaceText(this.props.currText, this.props.newText);
+    this.removeCard();
+  }
+
+  componentDidMount() {
+    this.findText(this.props.currText);
+  }
+
+  componentWillUnmount() {  
+    this.removeEffectFind();
+    this.setState({words: []});
+  }
 
   render() {
     return (
@@ -52,7 +100,7 @@ export default class Card extends Component {
       >
         <div style={{ fontSize: 16, letterSpacing: 0.15, marginBottom: 15, fontWeight: 500 }}>{this.props.title}</div>
         <div style={{ fontSize: 14, letterSpacing: 0.25, lineHeight: "20px", color: "#00000099" ,height:this.state.height,overflow:"hidden"}}>
-          {this.props.paragraph}
+          {`${this.props.currText} -> ${this.props.newText}`}
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "auto auto auto", marginTop: 20 }}>
           <div>
@@ -73,7 +121,7 @@ export default class Card extends Component {
               letterSpacing: "1.25px",
               cursor: "pointer",
             }}
-            onClick={this.insertText}
+            onClick={this.accept}
           >
             ACCEPT
           </div>

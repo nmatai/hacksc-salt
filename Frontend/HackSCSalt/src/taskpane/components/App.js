@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import TextField from '@mui/material/TextField';
 import CustomTabs from "./Tabs";
 import Card from "./Card";
+import ReplaceCard from "./ReplaceCard";
 import {ButtonInsertText, ButtonReplaceText, ButtonReplaceTextAll} from './Button';
 
 /* global Word, require */
@@ -31,12 +32,14 @@ const cardContentCorrection = [
 const cardContentRefinement = [
   {
     "title" : "Refinment 1",
-    "paragraph" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, .........",
+    "find" : "Hello",
+    "replace" : "Goodbye"
   },
   {
-    "title" : "Refinement 2",
-    "paragraph" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, .........",
-  }
+    "title" : "Refinment 2",
+    "find" : "Goodbye",
+    "replace" : "Hello"
+  },
 ]
 function TabContent({ name }) {
   return(
@@ -84,7 +87,7 @@ export default class App extends React.Component {
         <CustomTabs className="ms-customTabs" 
         summary={cardContentSummary.map((c) => (<Card title={c.title} paragraph={c.paragraph}/>))}
         correction={cardContentCorrection.map((c) => (<Card title={c.title} paragraph={c.paragraph}/>))}
-        refinement={cardContentRefinement.map((c) => (<Card title={c.title} paragraph={c.paragraph}/>))}/>
+        refinement={cardContentRefinement.map((c) => (<ReplaceCard title={c.title} currText={c.find} newText={c.replace}/>))}/>
         <div className="ms-taskItemsList">
           <ButtonInsertText newText="HackSC"/>
           <TextField label="Find" variant="standard" value={this.state.targetCurrentWord} onChange={this.changeCurrentWord}/>

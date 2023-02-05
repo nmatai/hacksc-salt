@@ -4,19 +4,16 @@ import { CircularProgressbarWithChildren, buildStyles } from "react-circular-pro
 // import '../../style.css';
 
 export default class Score extends Component {
-
-    constructor(props) {
-        super(props);
-
-    }
+  constructor(props) {
+    super(props);
+  }
   render() {
-
     return (
-      <div style={{ width: 200, height: 200,margin:"40px auto" }}>
+      <div style={{ width: 200, height: 200, margin: "40px auto" }}>
+        <div style={{ margin: "20px auto", width: "fit-content", fontWeight: 600, fontSize: 24 }}>Document Score</div>
         <CircularProgressbarWithChildren
           value={this.props.percentage}
           styles={buildStyles({
-
             strokeLinecap: "round",
 
             textSize: "32px",
@@ -31,7 +28,7 @@ export default class Score extends Component {
             backgroundColor: "#3e98c7",
           })}
         >
-          <div style={{ fontSize: 32, marginTop: -5,color:"#00A110" }}>
+          <div style={{ fontSize: 32, marginTop: -5, color: "#00A110" }}>
             <strong>{this.props.percentage}%</strong>
           </div>
         </CircularProgressbarWithChildren>

@@ -4,8 +4,6 @@ import { DefaultButton, TextField } from "@fluentui/react";
 import Header from "./Header";
 import HeroList from "./HeroList";
 import {ButtonInsertText, ButtonReplaceText} from './Button';
-import Score from "./Score";
-
 /* global Word, require */
 
 export default class App extends React.Component {

@@ -9,8 +9,9 @@ export default class Score extends Component {
   }
   render() {
     return (
-      <div style={{ width: 200, height: 200, margin: "40px auto" }}>
-        <div style={{ margin: "20px auto", width: "fit-content", fontWeight: 600, fontSize: 24 }}>Document Score</div>
+      <div style={{ width: 180, height: 150, margin: "40px auto" }}>
+        <div style={{ margin: "20px auto", width: "fit-content", fontWeight: 600, fontSize: 22 }}>Document Score</div>
+        <div style={{ width: 120, height: 120,margin:"auto"}}>
         <CircularProgressbarWithChildren
           value={this.props.percentage}
           styles={buildStyles({
@@ -28,10 +29,12 @@ export default class Score extends Component {
             backgroundColor: "#3e98c7",
           })}
         >
+          
           <div style={{ fontSize: 32, marginTop: -5, color: "#00A110" }}>
             <strong>{this.props.percentage}%</strong>
           </div>
         </CircularProgressbarWithChildren>
+        </div>
       </div>
     );
   }

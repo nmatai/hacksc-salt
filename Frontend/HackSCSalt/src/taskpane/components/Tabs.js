@@ -17,8 +17,8 @@ export default function CustomTabs({summary, correction, refinement}) {
                 onChange={updateIndex}
                 variant="fullWidth">
                     <Tab label="Summary"/>
-                    <Tab label="Corrections"/>
-                    <Tab label="Refinements"/>
+                    <Tab label="Missing Clauses"/>
+                    <Tab label="Suggestions"/>
                 </Tabs>
             </div>
             <TabPanel currIndex={index} index={0}>

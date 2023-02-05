@@ -1,11 +1,53 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { DefaultButton, TextField } from "@fluentui/react";
-import Header from "./Header";
-import HeroList from "./HeroList";
-import {ButtonInsertText, ButtonReplaceText} from './Button';
+import TextField from '@mui/material/TextField';
+import CustomTabs from "./Tabs";
+import Card from "./Card";
+import ReplaceCard from "./ReplaceCard";
+import {ButtonInsertText, ButtonReplaceText, ButtonReplaceTextAll} from './Button';
 
 /* global Word, require */
+const cardContentSummary = [
+  {
+    "title" : "Summary 1",
+    "paragraph" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, .........",
+  },
+  {
+    "title" : "Summary 2",
+    "paragraph" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, .........",
+  }
+]
+
+const cardContentCorrection = [
+  {
+    "title" : "Correction 1",
+    "paragraph" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, .........",
+  },
+  {
+    "title" : "Correction 2",
+    "paragraph" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, .........",
+  }
+]
+
+const cardContentRefinement = [
+  {
+    "title" : "Refinment 1",
+    "find" : "Hello",
+    "replace" : "Goodbye"
+  },
+  {
+    "title" : "Refinment 2",
+    "find" : "Goodbye",
+    "replace" : "Hello"
+  },
+]
+function TabContent({ name }) {
+  return(
+    <div>
+      <text>{`Hi, I'm ${name}`}</text>
+    </div>
+  );
+}
 
 export default class App extends React.Component {
   constructor(props, context) {
@@ -20,20 +62,6 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.setState({
-      listItems: [
-        {
-          icon: "Ribbon",
-          primaryText: "Achieve more with Office integration",
-        },
-        {
-          icon: "Unlock",
-          primaryText: "Unlock features and functionality",
-        },
-        {
-          icon: "Design",
-          primaryText: "Create and visualize like a pro",
-        },
-      ],
       targetCurrentWord: "Hello",
       targetNewWord: "Goodbye"
     });
@@ -53,35 +81,19 @@ export default class App extends React.Component {
     });
   }
 
-
-  // click = async () => {
-  //   return Word.run(async (context) => {
-  //     /**
-  //      * Insert your Word code here
-  //      */
-
-  //     // insert a paragraph at the end of the document.
-  //     const paragraph = context.document.body.insertParagraph("Hello World", Word.InsertLocation.end);
-
-  //     // change the paragraph color to blue.
-  //     paragraph.font.color = "blue";
-
-  //     await context.sync();
-  //   });
-  // };
-
-
-
   render() {
     return (
       <div className="ms-welcome">
-      <Header logo="assets/logo-filled.png" title={this.props.title} message="Welcome" />
-      <HeroList message="Discover what this add-in can do for you today!" items={this.state.listItems} >
-        <ButtonInsertText />
-        <TextField value={this.state.targetCurrentWord} onChange={this.changeCurrentWord}/>
-        <TextField value={this.state.targetNewWord} onChange={this.changeNewWord}/>
-        <ButtonReplaceText currText={this.state.targetCurrentWord} newText={this.state.targetNewWord}/>
-      </HeroList>
+        <CustomTabs className="ms-customTabs" 
+        summary={cardContentSummary.map((c) => (<Card title={c.title} paragraph={c.paragraph}/>))}
+        correction={cardContentCorrection.map((c) => (<Card title={c.title} paragraph={c.paragraph}/>))}
+        refinement={cardContentRefinement.map((c) => (<ReplaceCard title={c.title} currText={c.find} newText={c.replace}/>))}/>
+        <div className="ms-taskItemsList">
+          <ButtonInsertText newText="HackSC"/>
+          <TextField label="Find" variant="standard" value={this.state.targetCurrentWord} onChange={this.changeCurrentWord}/>
+          <TextField label="Replace" variant="standard" value={this.state.targetNewWord} onChange={this.changeNewWord}/>
+          <ButtonReplaceTextAll currText={this.state.targetCurrentWord} newText={this.state.targetNewWord}/>
+        </div>
       </div>
     );
   }

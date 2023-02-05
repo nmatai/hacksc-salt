@@ -1,16 +1,16 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
-import { DefaultButton, TextField } from "@fluentui/react";
+// import { DefaultButton, TextField } from "@fluentui/react";
 import Header from "./Header";
 import HeroList from "./HeroList";
-import {ButtonInsertText, ButtonReplaceText} from './Button';
+// import {ButtonInsertText, ButtonReplaceText} from './Button';
+import { ButtonInsertText, ButtonReplaceText,ButtonReplaceTextAll } from "./Button";
 
 import TextField from '@mui/material/TextField';
 import CustomTabs from "./Tabs";
 import Card from "./Card";
 import ReplaceCard from "./ReplaceCard";
-import {ButtonInsertText, ButtonReplaceText, ButtonReplaceTextAll} from './Button';
 
 
 /* global Word, require */
@@ -91,6 +91,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="ms-welcome">
+        <Header logo="assets/logo-filled.png" title={this.props.title} message="Welcome" />
         <CustomTabs className="ms-customTabs" 
         summary={cardContentSummary.map((c) => (<Card title={c.title} paragraph={c.paragraph}/>))}
         correction={cardContentCorrection.map((c) => (<Card title={c.title} paragraph={c.paragraph}/>))}

@@ -1,0 +1,28 @@
+{
+    "incomplete_clauses":[
+        "9"
+    ],
+    "unidentified_clauses":[
+        "23"
+    ],
+    "missing_clauses":{
+        "Assignment":"Receiving Party shall not assign this Agreement or any of its rights or obligations hereunder, whether by operation of law or otherwise, without the prior written consent of Disclosing Party, and any attempted assignment without such consent shall be null and void.",
+        "Attorneys' Fees":"In the event of litigation between the parties arising from this Agreement, the prevailing party shall be entitled to recover its reasonable attorneys' fees and costs incurred in connection with such litigation.",
+        "Captions":"The captions of this Agreement are not part of the provisions hereof and shall have no force or effect.",
+        "Counterparts":"This Agreement may be executed in counterparts, each of which shall be deemed an original, but all of which together shall constitute one and the same instrument.",
+        "Definition of Confidential Information":"\"Confidential Information\" shall include all information or material that has or could have commercial value or other utility in the business in which Disclosing Party is engaged. If Confidential Information is in written form, the Disclosing Party shall label or stamp the materials with the word \"Confidential\" or some similar warning. If Confidential Information is transmitted orally, the Disclosing Party shall promptly provide writing indicating that such oral communication constituted Confidential Information.",
+        "Dispute Resolution":"Any dispute arising under or in connection with this Agreement shall be resolved through arbitration in accordance with the rules of the American Arbitration Association. The arbitration shall be conducted in [INSERT CITY, STATE].",
+        "Entire Agreement":"This Agreement constitutes the entire agreement between the parties with respect to the subject matter hereof, and supersedes all prior understandings, agreements, representations, and warranties, whether written or oral, between the parties. This Agreement may not be amended or modified except in writing signed by both parties.",
+        "Force Majeure":"Neither party shall be liable for any failure to perform its obligations hereunder where such failure results from any cause beyond its reasonable control, including but not limited to, natural disaster, acts of government, shortage of materials, acts of terrorism or war.",
+        "Independent Contractors":"The parties to this Agreement are independent contractors. This Agreement shall not be construed to create an agency, partnership, joint venture or employment relationship and neither party shall have the power to bind the other or incur obligations on the other's behalf without the other's prior written consent.",
+        "Interpretation":"The parties acknowledge that they have been represented by counsel during the negotiation and execution of this Agreement or have had the opportunity to seek such representation. This Agreement shall not be strictly construed against either party, but shall be construed as if both parties contributed to its drafting.",
+        "No Implied Rights":"No rights or remedies of Disclosing Party shall be deemed to have arisen or shall be implied from this Agreement.",
+        "Notice":"All notices, requests, consents, claims, demands, waives and other communications hereunder shall be in writing and addressed to the parties at the addresses set forth in this Agreement or to such other address as either party may specify in writing.",
+        "Relationships":"Nothing contained in this Agreement shall be deemed to constitute either party a partner, joint venture or employee of the other party for any purpose.",
+        "Remedies":"The Receiving Party acknowledges that any breach of this Agreement may cause irreparable harm to the Disclosing Party and that monetary damages may be an inadequate remedy. The Receiving Party agrees that, in the event of a breach of this Agreement, the Disclosing Party shall be entitled to seek injunctive relief, in addition to any other remedies available at law or in equity.",
+        "Survival":"The provisions of this Agreement relating to confidentiality, non-use, non-disclosure and non-competition shall survive the termination or expiration of this Agreement for a period of [INSERT NUMBER OF YEARS].",
+        "Survival of Provisions":"All provisions of this Agreement relating to confidentiality and non-disclosure shall survive the termination of this Agreement.",
+        "Third-Party Beneficiaries":"There are no third-party beneficiaries to this Agreement, and nothing in this Agreement shall be deemed to benefit any third party."
+    },
+    "status":"success"
+}

@@ -19,14 +19,6 @@ export default class App extends React.Component {
 
   componentDidMount() {
     var data = this.readWholeDoc();
-
-    //   const requestOptions = {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(data)
-    // };
-
-    // fetch('https://60ff-2607-fb90-588-4774-7090-7732-9f6c-2fb5.ngrok.io/analyze',requestOptions)
     this.setState({
       listItems: [
         {
@@ -65,25 +57,7 @@ export default class App extends React.Component {
   readWholeDoc = async () => {
     var paragraphs;
     await Word.run(async (context) => {
-      //   paragraphs = context.document.body.paragraphs;
-      //   paragraphs.load("text");
-      //   await context.sync();
 
-      //   console.log(paragraphs.toJSON());
-
-      //   // const json = await response.json();
-      //   // setData(json);
-      //   await context.sync();
-      //   paragraphs["paragraphs"] = paragraphs.items
-      //   delete paragraphs["items"]
-      //   const requestOptions = {
-      //     method: 'POST',
-      //     headers: { 'Content-Type': 'application/json' },
-      //     body: JSON.stringify(data)
-      // };
-
-      // fetch('https://60ff-2607-fb90-588-4774-7090-7732-9f6c-2fb5.ngrok.io/analyze',requestOptions)
-      //   return paragraphs;
       var paragraphs = context.document.body.paragraphs;
       paragraphs.load("text");
       await context.sync();

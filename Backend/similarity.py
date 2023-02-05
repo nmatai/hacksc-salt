@@ -12,12 +12,12 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class ClauseSimilarity:
     def __init__(
-        self, nda_template_path, similarity_threshold1=0.7, similarity_threshold2=0.3
+        self, nda_template_path, similarity_threshold1=0.9, similarity_threshold2=0.5
     ):
         self.THRESHOLD1 = similarity_threshold1
         self.THRESHOLD2 = similarity_threshold2
         LOGGER.info(f"Loading sentence similarity model")
-        self.model = SentenceTransformer("all-mpnet-base-v2")
+        self.model = SentenceTransformer("all-MiniLM-L6-v2")
         LOGGER.info(f"Loading NDA template")
         self.load_nda_template(nda_template_path)
         LOGGER.info(f"Loading paragraph embeddings")
@@ -52,13 +52,13 @@ class ClauseSimilarity:
                 input_sections.append(self.template_sections[index])
             # If match is below THRESHOLD1 but above THRESHOLD2 then it is an incomplete match
             elif cosine_scores[i][index] >= self.THRESHOLD2:
-                # incomplete_clauses.append({
-                #     "input_clause": input_paragraphs[i],
-                #     "input_id": input_ids[i],
-                #     "template_section": self.template_sections[index],
-                #     "template_clause": self.template_paragraphs[index]
-                # })
-                incomplete_clauses.append(input_ids[i])
+                incomplete_clauses.append({
+                    "input_clause": input_paragraphs[i],
+                    "input_id": input_ids[i],
+                    "template_section": self.template_sections[index],
+                    "template_clause": self.template_paragraphs[index]
+                })
+                # incomplete_clauses.append(input_ids[i])
             else:
                 unidentified_clauses.append(input_ids[i])
 
@@ -67,16 +67,21 @@ class ClauseSimilarity:
         LOGGER.info(f"Duplicate check counter: {Counter(input_sections)}")
         missing_sections = set(self.template_sections) - set(input_sections)
         # Populate missing sections and their clauses
-        missing_clauses = {}
+        missing_clauses = []
         for section_name in missing_sections:
-            missing_clauses[section_name] = self.template_json[section_name]['paragraph']
+            missing_clauses.append({
+                "title": section_name,
+                "paragraph": self.template_json[section_name]['paragraph']
+            })
 
         return missing_clauses, incomplete_clauses, unidentified_clauses
 
     def get_missing_subclauses(self, incomplete_clauses):
+        incomplete_clause_suggestion = []
         # for data in incomplete_clauses:
         #     template_clause = data["template_clause"]
         #     input_clause = data["input_clause"]
+            
         #     # Create a prompt for GTP 3
         #     prompt = f"Given the template clause below:\n\n{template_clause}\n\nIs there anything missing in the input clause below?\n\n{input_clause}"
 
@@ -85,15 +90,21 @@ class ClauseSimilarity:
         #         prompt=prompt,
         #         temperature=0,
         #         max_tokens=200,
-        #         top_p=0,
+        #         top_p=0.3,
         #         frequency_penalty=0,
         #         presence_penalty=0
         #     )
-        #     print(f"OpenAI API prompt: {prompt}")
-        #     print(f"OpenAI API response: {response}")
-        #     break
+
+        #     suggestion = response["choices"][0]["text"]
+        #     print(f"OpenAI API response: {suggestion}")
+        #     # if response.startswith
+        #     incomplete_clause_suggestion.append({
+        #         "title": data["template_section"],
+        #         "id": data["input_id"],
+        #         "suggestion": f"Missing text: {suggestion}"
+        #     })
     
-        return None
+        return incomplete_clause_suggestion
 
     def get_unwanted_clauses(self):
         pass

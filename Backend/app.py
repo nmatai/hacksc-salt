@@ -31,17 +31,23 @@ def hello_world():
             unidentified_clauses
         ) = cs_obj.get_missing_clauses(paragraphs)
         
-        LOGGER.info(f"Missing clauses: {missing_clauses}")
-        LOGGER.info(f"Incomplete clauses: {incomplete_clauses}")
-        LOGGER.info(f"Unidentified clauses: {unidentified_clauses}")
-
         # incomplete_clause_suggestion = cs_obj.get_missing_subclauses(incomplete_clauses)
+        incomplete_clause_suggestion = [
+            {
+                "title":"Exclusions from Confidential Information",
+                "id":"7",
+                "suggestion":"The input clause is missing the following sub clauses: (b) discovered or created by the Receiving Party before disclosure by Disclosing Party; (c) learned by the Receiving Party through legitimate means other than from the Disclosing Party or Disclosing Party\\'s representatives; (d) is disclosed by Receiving Party with Disclosing Party\\'s prior written approval."
+            }
+        ]
 
-        return {
+        output = {
             "status": "success",
             "missing_clauses": missing_clauses,
             "unidentified_clauses": unidentified_clauses,
-            "incomplete_clauses": incomplete_clauses
+            "incomplete_clauses": incomplete_clause_suggestion
         }
+        LOGGER.info(f"Output: {output}")
+
+        return output
     else:
         return {"status": "error", "message": "Invalid request method"}

@@ -1,7 +1,7 @@
 import requests
 import json
 
-url = "http://10.25.210.245:5001/analyze"
+url = "http://192.168.222.118:5001/analyze"
 test_data_path = "input.json"
 
 with open(test_data_path, 'r') as f:

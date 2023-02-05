@@ -17,7 +17,7 @@ class ClauseSimilarity:
         self.THRESHOLD1 = similarity_threshold1
         self.THRESHOLD2 = similarity_threshold2
         LOGGER.info(f"Loading sentence similarity model")
-        self.model = SentenceTransformer("all-distilroberta-v1")
+        self.model = SentenceTransformer("all-MiniLM-L6-v2")
         LOGGER.info(f"Loading NDA template")
         self.load_nda_template(nda_template_path)
         LOGGER.info(f"Loading paragraph embeddings")
@@ -78,31 +78,31 @@ class ClauseSimilarity:
 
     def get_missing_subclauses(self, incomplete_clauses):
         incomplete_clause_suggestion = []
-        for data in incomplete_clauses:
-            template_clause = data["template_clause"]
-            input_clause = data["input_clause"]
+        # for data in incomplete_clauses:
+        #     template_clause = data["template_clause"]
+        #     input_clause = data["input_clause"]
             
-            # Create a prompt for GTP 3
-            prompt = f"Given the template clause below:\n\n{template_clause}\n\nIs there anything missing in the input clause below?\n\n{input_clause}"
+        #     # Create a prompt for GTP 3
+        #     prompt = f"Given the template clause below:\n\n{template_clause}\n\nIs there anything missing in the input clause below?\n\n{input_clause}"
 
-            response = openai.Completion.create(
-                model="text-davinci-003",
-                prompt=prompt,
-                temperature=0,
-                max_tokens=200,
-                top_p=0.3,
-                frequency_penalty=0,
-                presence_penalty=0
-            )
+        #     response = openai.Completion.create(
+        #         model="text-davinci-003",
+        #         prompt=prompt,
+        #         temperature=0,
+        #         max_tokens=200,
+        #         top_p=0.3,
+        #         frequency_penalty=0,
+        #         presence_penalty=0
+        #     )
 
-            suggestion = response["choices"][0]["text"]
-            print(f"OpenAI API response: {suggestion}")
-            # if response.startswith
-            incomplete_clause_suggestion.append({
-                "title": data["template_section"],
-                "id": data["input_id"],
-                "suggestion": f"Missing text: {suggestion}"
-            })
+        #     suggestion = response["choices"][0]["text"]
+        #     print(f"OpenAI API response: {suggestion}")
+        #     # if response.startswith
+        #     incomplete_clause_suggestion.append({
+        #         "title": data["template_section"],
+        #         "id": data["input_id"],
+        #         "suggestion": f"Missing text: {suggestion}"
+        #     })
     
         return incomplete_clause_suggestion
 

@@ -11,6 +11,8 @@
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
   <AppDomains>
     <AppDomain>https://www.contoso.com</AppDomain>
+    <AppDomain>https://60ff-2607-fb90-588-4774-7090-7732-9f6c-2fb5.ngrok.io</AppDomain>
+
   </AppDomains>
   <Hosts>
     <Host Name="Document"/>
